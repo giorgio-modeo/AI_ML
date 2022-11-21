@@ -6,7 +6,6 @@ input_vector = []
 for i in range(1,3):
     input_vector.append(float(input("inserisci i numeri:")))
 """
-
 weights_1 = [1.26, 0]
 weights_2 = [2.17, 0.32]
 first_indexes_mult = input_vector[0] * weights_1[0]
