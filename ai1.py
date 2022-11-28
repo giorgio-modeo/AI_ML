@@ -63,7 +63,7 @@ Prediction: [0.01496248]; Error: [0.00022388]
 obbligatorio mttere la virgola
 """
 bias = np.array([0.0])
-bias2 = np.array([-1.0])
+
 
 #    e una funzione non lineare (e stabile su un valore poi incrementa o decrementa per un lesso di tempo ben definito e infine si stabilizza su un altro valore)
 #    nello specifico la sigmoide passa da (-n a n) sull asse delle x mentre sull asse delle y passa da 0 a 1 
@@ -73,15 +73,14 @@ def sigmoid(x):
 #    creo l'algoritmo della predizione
 def make_prediction(input_vector, weights, bias):
      #    creo i layer per fare le predizzioni, servono per far comunicare le diverse fasi del processo 
-          #layer di input/hiden
+     #    layer di input/hiden
       layer_1 = np.dot(input_vector, weights) + bias
-      layer_2 = np.dot(input_vector, weights) + bias2
-          #layer di output
-      layer_3 = sigmoid(layer_1 + layer_2)
-      return layer_3
+     #    layer di output
+      layer_2 = sigmoid(layer_1)
+      return layer_2
 
 #    faccio la predizzione con i vettori standard
-prediction = make_prediction(input_vector, weights_1, bias, bias2)
+prediction = make_prediction(input_vector, weights_1, bias)
 print(f"The prediction result is: {prediction}")
 
 #    faccio la predizzione modificando i vettori 
@@ -89,29 +88,43 @@ input_vector = np.array([2, 1.5])
 prediction = make_prediction(input_vector, weights_1, bias)
 print(f"The prediction result is: {prediction}")
 
+#    calcolo dell'errore rispetto al target 
 target = 0
 mse = np.square(prediction - target)
 print(f"Prediction: {prediction}; Error: {mse}")
 
+#    calcolo della derivata di funzione costante
 derivative = 2 * (prediction - target)
 print(f"The derivative is {derivative}")
 
+#    sovrascrivo i pesi in modo da trovare i migliori per ogni predizzione  
 weights_1 = weights_1 - derivative
+
+#    faccio una predizzione più vicina alla realtà
 prediction = make_prediction(input_vector, weights_1, bias)
+
+#    calcolo l'errore della nuova predizione
 error = (prediction - target) ** 2
 print(f"Prediction: {prediction}; Error: {error}")
 
+#    definisco l'algoritmo per la derivata della sigmoide originale in modo da trovare ogni valore di calcolo più precisamente 
 def sigmoid_deriv(x):
      return sigmoid(x) * (1-sigmoid(x))
+
 derror_dprediction = 2 * (prediction - target)
+#    "creo" un layer per connettere l'inizzio del codice alla fine 
 layer_1 = np.dot(input_vector, weights_1) + bias
+#    miglioro il layer utilizzando la sigmoide
 dprediction_dlayer1 = sigmoid_deriv(layer_1)
 dlayer1_dbias = 1
+#    
 derror_dbias = (
      derror_dprediction * dprediction_dlayer1 * dlayer1_dbias
  )
- #
+
+#
 learning_rate = 0.1
+
 neural_network = nn1.NeuralNetwork(learning_rate)
 neural_network.predict(input_vector)
 input_vectors = np.array([[3, 1.5],[2, 1],[4, 1.5],[3, 4],[3.5, 0.5],[2, 0.5],[5.5, 1],[1, 1],])
