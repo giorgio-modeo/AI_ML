@@ -1,2 +1,2 @@
 # python
- its-itc_scool
+ its-itc_school
