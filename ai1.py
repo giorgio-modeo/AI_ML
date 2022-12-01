@@ -2,6 +2,8 @@
 #importo numpy per i calcoli complessi
 import numpy as np
 
+import random as r
+
 import nn1
 
 import matplotlib.pyplot as plt
@@ -27,12 +29,13 @@ print(f"The dot product is: {dot_product_1}")
 print(f"The dot product is: {dot_product_2}")
 ###################################################################################################################
 
+print("\nseconda ai di prova\n")
 
 ################################################################################################################### secondo segmento di prova
 
 #inmetto i punti dei vettori 
           #    np.array() serve pe dichiarare un array di numeri
-input_vector = np.array([1.66, 1.56,])
+input_vector = np.array([[1.66, 1.56,],[1.66, 1.56],])
 #inposto i pesi
 weights_1 = np.array([1.45, -0.66])
 
@@ -89,7 +92,7 @@ prediction = make_prediction(input_vector, weights_1, bias)
 print(f"The prediction result is: {prediction}")
 
 #    calcolo dell'errore rispetto al target 
-target = 0
+target = np.array([0 ,1])
 mse = np.square(prediction - target)
 print(f"Prediction: {prediction}; Error: {mse}")
 
@@ -122,14 +125,16 @@ derror_dbias = (
      derror_dprediction * dprediction_dlayer1 * dlayer1_dbias
  )
 
-#
-learning_rate = 0.1
-
+#     non so cosa succede qui
+learning_rate = 0.01
 neural_network = nn1.NeuralNetwork(learning_rate)
 neural_network.predict(input_vector)
+
+# gli imput devono essere proporzionali ai target
 input_vectors = np.array([[3, 1.5],[2, 1],[4, 1.5],[3, 4],[3.5, 0.5],[2, 0.5],[5.5, 1],[1, 1],])
-targets = np.array([0, 1, 0, 1, 0, 1, 1, 0])
-neural_network = nn1.NeuralNetwork( )
+targets = np.array([0, 1, 0, 1, 0, 1, 1, 0, ])
+
+neural_network = nn1.NeuralNetwork(learning_rate)
 training_error = neural_network.train(input_vectors, targets, 10000)
 plt.plot(training_error)
 plt.xlabel("Iterations")
