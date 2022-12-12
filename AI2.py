@@ -1,5 +1,6 @@
 import numpy
-import keras
+import numpy
+from tensorflow import keras
 from keras.constraints import maxnorm
 from keras.utils import np_utils
 from keras.datasets import cifar10
@@ -32,11 +33,12 @@ model.add(keras.layers.Conv2D(32, 3, input_shape=(32, 32, 3), activation='relu',
 model.add(keras.layers.Dropout(0.2))
 model.add(keras.layers.BatchNormalization())
 
+#layer
 model.add(keras.layers.Conv2D(64, 3, activation='relu', padding='same'))
 model.add(keras.layers.MaxPooling2D(2))
 model.add(keras.layers.Dropout(0.2))
 model.add(keras.layers.BatchNormalization())
-    
+
 model.add(keras.layers.Conv2D(128, 3, activation='relu', padding='same'))
 model.add(keras.layers.Dropout(0.2))
 model.add(keras.layers.BatchNormalization())
@@ -45,5 +47,16 @@ model.add(keras.layers.Conv2D(256, 3, activation='relu', padding='same'))
 model.add(keras.layers.Dropout(0.2))
 model.add(keras.layers.BatchNormalization())
 
+
 model.add(keras.layers.Flatten())
 model.add(keras.layers.Dropout(0.2))
+
+model.add(keras.layers.Dense(32, activation='relu'))
+model.add(keras.layers.Dropout(0.3))
+model.add(keras.layers.BatchNormalization())
+
+model.add(keras.layers.Dense(class_num, activation='softmax'))
+
+model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy', 'val_accuracy'])
+
+print(model.summary())
