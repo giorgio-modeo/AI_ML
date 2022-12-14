@@ -4,8 +4,7 @@ import numpy as np
 
 import random as r
 
-import nn1
-
+import nn1 
 import matplotlib.pyplot as plt
 
 ################################################################################################################### questo segmento e per fare un esempio 
@@ -114,6 +113,7 @@ print(f"Prediction: {prediction}; Error: {error}")
 def sigmoid_deriv(x):
      return sigmoid(x) * (1-sigmoid(x))
 
+#    calcolo la derivata del errore dela predizione
 derror_dprediction = 2 * (prediction - target)
 #    "creo" un layer per connettere l'inizzio del codice alla fine 
 layer_1 = np.dot(input_vector, weights_1) + bias
@@ -124,6 +124,8 @@ dlayer1_dbias = 1
 derror_dbias = (
      derror_dprediction * dprediction_dlayer1 * dlayer1_dbias
  )
+
+#     fine seconda ai
 
 #     non so cosa succede qui
 learning_rate = 0.01
