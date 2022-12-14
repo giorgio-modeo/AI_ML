@@ -1,5 +1,4 @@
 import numpy
-import numpy
 import keras
 from keras.constraints import maxnorm
 from keras.utils import np_utils
