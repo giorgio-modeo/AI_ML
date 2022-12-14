@@ -1,6 +1,6 @@
 import numpy
 import numpy
-from tensorflow import keras
+import keras
 from keras.constraints import maxnorm
 from keras.utils import np_utils
 from keras.datasets import cifar10
