@@ -109,7 +109,10 @@ prediction = make_prediction(input_vector, weights_1, bias)
 error = (prediction - target) ** 2
 print(f"Prediction: {prediction}; Error: {error}")
 
-#    definisco l'algoritmo per la derivata della sigmoide originale in modo da trovare ogni valore di calcolo più precisamente 
+#     definisco l'algoritmo per la derivata della sigmoide originale in modo da trovare ogni valore di calcolo più precisamente 
+#     v = vettore
+#     
+#
 def sigmoid_deriv(x):
      return sigmoid(x) * (1-sigmoid(x))
 
