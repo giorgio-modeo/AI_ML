@@ -1,5 +1,6 @@
 import numpy as np
 
+
 class NeuralNetwork:
     def __init__(self, learning_rate):
         #inposto i pesi per far in modo che successivamente il prodotto non possa venire 0
@@ -64,7 +65,6 @@ class NeuralNetwork:
 
 #    calcolo la derivata del errore dela derivata predizione
         derror_dprediction = 2 * (prediction - target)
-#
         dprediction_dlayer1 = self._sigmoid_deriv(layer_1)
         dlayer1_dbias = 1
 
