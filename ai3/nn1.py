@@ -92,23 +92,18 @@ class NeuralNetwork:
 
         for current_iteration in range(iterations):
 
-            # Pick a data instance at random
-
+            # randomizza un numero da 0 alla lungezza della lista dei vettori
             random_data_index = np.random.randint(len(input_vectors))
 
-
+#           # prendo il il vettore corispondente a un numero random
             input_vector = input_vectors[random_data_index]
-
+            # prendo il target corrispondente al numero randomico
             target = targets[random_data_index]
 
 
             # Compute the gradients and update the weights
 
-            derror_dbias, derror_dweights = self._compute_gradients(
-
-                input_vector, target
-
-            )
+            derror_dbias, derror_dweights = self._compute_gradients(input_vector, target)
 
 
             self._update_parameters(derror_dbias, derror_dweights)
