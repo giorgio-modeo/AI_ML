@@ -1,3 +1,5 @@
+import sys
+sys.path.append("E:/py/python/nn1")
 import nn1
 import numpy as np
 import matplotlib.pyplot as plt
