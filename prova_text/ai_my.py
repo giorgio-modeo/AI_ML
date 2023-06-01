@@ -41,18 +41,26 @@ a =neural_network.predict(input_vectors)
 for d in a:
     i+=1
     print("\n-------------------- ",i)
+    d *= 100
     while True:
         if d<65:
-            d *= 10
+            d *= 100
         else:
             d=int(d)
             if d>122:
-                print("null")
+                d-= 100
+                print(chr(d))
+                break
             elif d>=97:
                 print(chr(d))
+                break
             elif d>90 and d<96:
                 print("null")
+                break
+            elif d >= 65:
+                print(chr(d))
+                break
             print(d)
-            break
+            
 print("\n--------------------")
 training_error = neural_network.train(input_vectors, targets, 10000)
