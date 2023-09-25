@@ -24,6 +24,7 @@ class NeuralNetwork:
     # Definizione della funzione di attivazione sigmoid
     def _sigmoid(self, x):
         return 1 / (1 + np.exp(-x))
+
     # Definizione della derivata della funzione di attivazione sigmoid
     def _sigmoid_deriv(self, x):
         return self._sigmoid(x) * (1 - self._sigmoid(x))
