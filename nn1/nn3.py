@@ -16,7 +16,7 @@ class NeuralNetwork:
         self.weights = Word2Vec.wv.vectors
         self.weights_2 = Word2Vec.wv.vectors
 
-        self.bias = np.random.normal(loc=0.0,scale=0.01,size=20)
+        self.bias = np.random.normal(loc=0.0,scale=0.01,size=(100,200))
         self.bias_2 = np.random.normal(loc=0.0,scale=0.01,size=(100,200))
         # Impostazione del learning rate
         self.learning_rate = learning_rate
@@ -32,7 +32,7 @@ class NeuralNetwork:
     def tokenize(text):
         return text.split()
     
-    def word2vec_lookup(model, token):
+    def word2veclookup(model, token):
     # Controlla se il token esiste nel modello Word2Vec
         if token not in model.wv:
             raise KeyError(f"Il token '{token}' non esiste nel modello Word2Vec")
@@ -46,7 +46,7 @@ class NeuralNetwork:
     # Definizione del metodo predict, che restituisce la previsione della rete neurale
     def predict(self,input_phrase):
         input_tokens = tokenize(input_phrase) 
-        input_vectors = [word2vec_lookup(token) for token in input_tokens]
+        input_vectors = [word2veclookup(token) for token in input_tokens]
 
         input_vector = combine_vectors(input_vectors)
 
@@ -60,14 +60,25 @@ class NeuralNetwork:
         prediction = layer_3
         return prediction
 
+
+    def forward(self,input_vector):
+        np.dot(input_vector, self.weights) + self.bias
+        output = np.tanh(output)
+        return output
+    
+    def loss_fun():
+        return
+
     # Definizione del metodo per il calcolo dei gradienti
     def _compute_gradients(self, input_vector, target):
         # Calcolo dell'output del primo layer
-        layer_1 = np.dot(input_vector, self.weights) + self.bias
+        layer_1 = forward(input_vector)
         # Applicazione della funzione di attivazione sigmoid all'output del primo layer
-        layer_2 = self._sigmoid(layer_1)
+        layer_2 = forward(layer_1)
         # La previsione è l'output del secondo layer
         prediction = layer_2
+
+
         # Calcolo della derivata dell'errore rispetto alla previsione
         derror_dprediction = 2 * (prediction - target)
         # Calcolo della derivata dell'output del secondo layer rispetto all'output del primo layer
@@ -126,3 +137,4 @@ class NeuralNetwork:
 
 
         return cumulative_errors
+
