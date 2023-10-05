@@ -1,6 +1,4 @@
 import numpy as np
-<<<<<<< Updated upstream:ai2/AI2.py
-=======
 import random as r
 import nn1
 import matplotlib.pyplot as plt
@@ -26,7 +24,6 @@ print(f"The dot product is: {dot_product_1}")
 print(f"The dot product is: {dot_product_2}")
 ###################################################################################################################
 
->>>>>>> Stashed changes:ai1.py
 print("\nseconda ai di prova\n")
 
 ################################################################################################################### secondo segmento di prova

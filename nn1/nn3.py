@@ -1,13 +1,26 @@
 import numpy as np
 from gensim.models.keyedvectors import KeyedVectors
+import gensim.models.word2vec as KeyedVectors2
+
+
+# Crea un set di dati di frasi
+sentences = ["Ciao, come stai?", "Sto bene, grazie. E tu?", "Anch'io sto bene."]
+
+
+# Crea un nuovo modello Word2Vec
+model = KeyedVectors2.Word2Vec(sentences, vector_size=100, window=5, min_count=1)
+
+# Salva il modello
+model.save("word2vec.model")
 
 # Definizione della classe NeuralNetwork
 class NeuralNetwork:
     # Definizione del metodo init, che inizializza i pesi, il bias e il learning rate
     def __init__(self, learning_rate):
         # Inizializzazione dei pesi con i vettori di embedding del modello Word2Vec
-        self.weights = KeyedVectors.load_word2vec_format("nn1/word2vec.model")
-        self.weights_2 = KeyedVectors.load_word2vec_format("nn1/word2vec.model")
+
+        self.weights = KeyedVectors.load_word2vec_format("word2vec.model")
+        self.weights_2 = KeyedVectors.load_word2vec_format("./nn1/word2vec.model")
 
         self.bias = np.random.normal(loc=0.0,scale=0.01,size=(100,200))
         self.bias_2 = np.random.normal(loc=0.0,scale=0.01,size=(100,200))

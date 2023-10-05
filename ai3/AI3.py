@@ -26,6 +26,7 @@ print(input_vectors)
 
 neural_network = nn2.NeuralNetwork(learning_rate)
 training_error = neural_network.train(input_vectors, targets, 10000)
+print(neural_network.predict(input_vectors))
 plt.plot(training_error)
 plt.xlabel("Iterations")
 plt.ylabel("Error for all training instances")
