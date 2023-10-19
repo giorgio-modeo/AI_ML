@@ -9,8 +9,8 @@ class NeuralNetwork:
     def __init__(self, learning_rate):
         # Inizializzazione dei pesi con i vettori di embedding del modello Word2Vec
 
-        self.weights = KeyedVectors.load_word2vec_format("word2vec.model")
-        self.weights_2 = KeyedVectors.load_word2vec_format("./nn1/word2vec.model")
+        self.weights = KeyedVectors.load("word2vec.model")
+        self.weights_2 = KeyedVectors.load("word2vec.model")
 
         self.bias = np.random.normal(loc=0.0,scale=0.01,size=(100,200))
         self.bias_2 = np.random.normal(loc=0.0,scale=0.01,size=(100,200))
@@ -83,45 +83,45 @@ class NeuralNetwork:
         # Restituzione delle derivate
         return derror_dbias, derror_dweights
 
-# Definizione del metodo per l'aggiornamento dei parametri
-def _update_parameters(self, derror_dbias, derror_dweights):
-    # Aggiornamento del bias
-    self.bias = self.bias - (derror_dbias * self.learning_rate)
-    # Aggiornamento dei pesi
-    self.weights = self.weights - (
-        derror_dweights * self.learning_rate
-    )
-
-def train(self, input_phrases, targets, iterations):
-    cumulative_errors = []
-    for current_iteration in range(iterations):
-        # Selezione casuale di un batch di dati di addestramento
-        batch_size = 32
-        random_indices = np.random.permutation(len(input_phrases))
-        random_indices = random_indices[:batch_size]
-        batch_input_phrases = [input_phrases[index] for index in random_indices]
-        batch_targets = [targets[index] for index in random_indices]
-
-        # Calcolo delle derivate parziali dell'errore rispetto ai parametri del modello
-        derror_dbias, derror_dweights = self._compute_gradients(
-            batch_input_phrases, batch_targets
+    # Definizione del metodo per l'aggiornamento dei parametri
+    def _update_parameters(self, derror_dbias, derror_dweights):
+        # Aggiornamento del bias
+        self.bias = self.bias - (derror_dbias * self.learning_rate)
+        # Aggiornamento dei pesi
+        self.weights = self.weights - (
+            derror_dweights * self.learning_rate
         )
 
-        # Aggiornamento dei pesi e dei bias utilizzando le derivate calcolate
-        self._update_parameters(derror_dbias, derror_dweights)
+    def train(self, input_phrases, targets, iterations):
+        cumulative_errors = []
+        for current_iteration in range(iterations):
+            # Selezione casuale di un batch di dati di addestramento
+            batch_size = 32
+            random_indices = np.random.permutation(len(input_phrases))
+            random_indices = random_indices[:batch_size]
+            batch_input_phrases = [input_phrases[index] for index in random_indices]
+            batch_targets = [targets[index] for index in random_indices]
 
-        # Ogni 100 iterazioni, calcola l'errore cumulativo su tutto il dataset
-        if current_iteration % 100 == 0:
-            cumulative_error = 0
-            for data_instance_index in range(len(input_phrases)):
-                data_phrase = input_phrases[data_instance_index]
-                target = targets[data_instance_index]
-                prediction = self.predict(data_phrase)
-                error = np.square(prediction - target)
-                cumulative_error += error
-            cumulative_errors.append(cumulative_error)
+            # Calcolo delle derivate parziali dell'errore rispetto ai parametri del modello
+            derror_dbias, derror_dweights = self._compute_gradients(
+                batch_input_phrases, batch_targets
+            )
 
-    return cumulative_errors
+            # Aggiornamento dei pesi e dei bias utilizzando le derivate calcolate
+            self._update_parameters(derror_dbias, derror_dweights)
+
+            # Ogni 100 iterazioni, calcola l'errore cumulativo su tutto il dataset
+            if current_iteration % 100 == 0:
+                cumulative_error = 0
+                for data_instance_index in range(len(input_phrases)):
+                    data_phrase = input_phrases[data_instance_index]
+                    target = targets[data_instance_index]
+                    prediction = self.predict(data_phrase)
+                    error = np.square(prediction - target)
+                    cumulative_error += error
+                cumulative_errors.append(cumulative_error)
+
+        return cumulative_errors
 
 
 
