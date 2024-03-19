@@ -131,7 +131,6 @@ derror_dbias = (
 =======
  )
 
-#     non so cosa succede qui
 learning_rate = 0.01
 neural_network = nn1.NeuralNetwork(learning_rate)
 neural_network.predict(input_vector)
